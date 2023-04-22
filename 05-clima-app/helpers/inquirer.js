@@ -26,7 +26,7 @@ const questions = [
 
 const inquirerMenu = async () => {
 
-    console.clear();
+    // console.clear();
     console.log('=========================='.green);
     console.log('  Seleccione una opción'.white);
     console.log('==========================\n'.green);
@@ -70,15 +70,15 @@ const readInput = async (message) => {
     return desc;
 }
 
-const listadoTareasBorrar = async (tasks = []) => {
+const listPlaces = async (places = []) => {
 
-    const choices = tasks.map((task, i) => {
+    const choices = places.map((place, i) => {
 
         const idx = `${i + 1}.`.green;
 
         return {
-            value: task.id,
-            name: `${idx} ${task.desc}`
+            value: place.id,
+            name: `${idx} ${place.name}`
         }
     });
 
@@ -91,7 +91,7 @@ const listadoTareasBorrar = async (tasks = []) => {
         {
             type: 'list',
             name: 'id',
-            message: 'Borrar',
+            message: 'Seleccione lugar:',
             choices
         }
     ]
@@ -100,53 +100,9 @@ const listadoTareasBorrar = async (tasks = []) => {
     return id;
 }
 
-const confirmar = async (message) => {
-
-    const question = [
-        {
-            type: 'confirm',
-            name: 'ok',
-            message
-        }
-    ];
-
-    const { ok } = await inquirer.prompt(question);
-
-    return ok;
-
-}
-
-const mostrarListadoCheckList = async (tasks = []) => {
-
-    const choices = tasks.map((task, i) => {
-
-        const idx = `${i + 1}.`.green;
-
-        return {
-            value: task.id,
-            name: `${idx} ${task.desc}`,
-            checked: (task.completadoEn) ? true : false
-        }
-    });
-
-    const question = [
-        {
-            type: 'checkbox',
-            name: 'ids',
-            message: 'Seleccione',
-            choices
-        }
-    ]
-
-    const { ids } = await inquirer.prompt(question);
-    return ids;
-}
-
 module.exports = {
     inquirerMenu,
     pause,
     readInput,
-    listadoTareasBorrar,
-    confirmar,
-    mostrarListadoCheckList
+    listPlaces
 }
