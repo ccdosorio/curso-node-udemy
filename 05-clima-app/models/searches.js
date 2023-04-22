@@ -10,7 +10,7 @@ class Searches {
 
     get paramsMapbox() {
         return {
-            'access_token': 'pk.eyJ1Ijoia2xlcml0aCIsImEiOiJja2tvZHh4Y3YwMDhnMnBvY3ozbHUxdGJvIn0.3zptKSSxJrM5VmfjnkKMYA',
+            'access_token': process.env.MAPBOX_KEY,
             'limit': 5,
             'language': 'es'
         }
@@ -25,6 +25,7 @@ class Searches {
             });
 
             const resp = await intance.get();
+            console.log(resp.data);
             return [];
         } catch (error) {
             return [];
