@@ -43,7 +43,8 @@ const User = sequelize.define('User', {
 }, {
     getterMethods: {
         user() {
-            const { password, ...user } = this.dataValues;
+            const { password, id, ...user } = this.dataValues;
+            user.uid = id;
             return user;
         }
     }, tableName: 'users'

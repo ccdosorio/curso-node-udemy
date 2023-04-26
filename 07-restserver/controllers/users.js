@@ -1,4 +1,4 @@
-const { response, request } = require("express");
+const { response, request } = require('express');
 const bcryptjs = require('bcryptjs');
 
 const User = require('../models/user');
@@ -8,7 +8,7 @@ const usersGet = async (req = request, res = response) => {
     const { offset = 0, limit = 5 } = req.query;
     const users = await User.findAndCountAll({
         where: { status: true },
-        attributes: ['id', 'name', 'email', 'role', 'status'],
+        attributes: [['id', 'uid'], 'name', 'email', 'role', 'status'],
         limit: Number(limit),
         offset: Number(offset)
     });
@@ -56,9 +56,6 @@ const usersDelete = async (req = request, res) => {
     const { id } = req.params;
 
     const userDB = await User.findByPk(id);
-
-    // Borrar fisicamente
-    // const deletedUser = await userDB.destroy({ where: { id } });
 
     const deletedUser = await userDB.update({
         status: false
