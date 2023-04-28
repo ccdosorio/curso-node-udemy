@@ -16,7 +16,7 @@ const usersGet = async (req = request, res = response) => {
     res.json(users);
 };
 
-const usertsPost = async (req = request, res) => {
+const usertsPost = async (req = request, res = response) => {
 
     const { name, email, password, role } = req.body;
     const user = new User({ name, email, password, role });
@@ -31,9 +31,9 @@ const usertsPost = async (req = request, res) => {
     res.status(201).json(user.user);
 };
 
-const usersPut = async (req = request, res) => {
+const usersPut = async (req = request, res = response) => {
 
-    const id = req.params.id;
+    const { id } = req.params;
     const { password, google, email, ...user } = req.body;
 
     const userDB = await User.findByPk(id);
@@ -41,7 +41,7 @@ const usersPut = async (req = request, res) => {
     if (password) {
         // Ecriptar la password
         const salt = bcryptjs.genSaltSync();
-        user.password = bcryptjs.hashSync(password, salt);
+        userDB.password = bcryptjs.hashSync(password, salt);
     }
 
     const updateUser = await userDB.update(user, {
@@ -51,7 +51,7 @@ const usersPut = async (req = request, res) => {
     res.status(200).json(updateUser.user);
 };
 
-const usersDelete = async (req = request, res) => {
+const usersDelete = async (req = request, res = response) => {
 
     const { id } = req.params;
 

@@ -4,7 +4,7 @@ const sequelize = require('../database/config');
 
 const User = sequelize.define('User', {
     id: {
-        type: DataTypes.BIGINT,
+        type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true
@@ -47,7 +47,10 @@ const User = sequelize.define('User', {
             user.uid = id;
             return user;
         }
-    }, tableName: 'users'
+    },
+    tableName: 'users',
+    modelName: 'User',
+    sequelize
 });
 
 module.exports = User;

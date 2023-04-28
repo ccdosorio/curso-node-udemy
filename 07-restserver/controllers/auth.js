@@ -9,7 +9,9 @@ const login = async (req = request, res = response) => {
 
     try {
 
-        const user = await User.findOne({ where: { email } });
+        const user = await User.findOne({
+            where: { email }
+        });
 
         // Verificar si el email existe
         if (!user) {

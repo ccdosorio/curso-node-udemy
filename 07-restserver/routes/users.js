@@ -25,6 +25,7 @@ router.post('/', [
 ], usertsPost);
 
 router.put('/:id', [
+    check('id', 'El id debe ser numerico.').isNumeric(),
     check('id').custom(userExistsById),
     check('role').custom(isValidRole),
     validateFields
@@ -33,6 +34,7 @@ router.put('/:id', [
 router.delete('/:id', [
     validateJWT,
     // isAdminRole,
+    check('id', 'El id debe ser numerico.').isNumeric(),
     hasRole('ADMIN_ROLE', 'USER_ROLE'),
     check('id').custom(userExistsById),
     validateFields
