@@ -35,10 +35,19 @@ const productExistsById = async (id) => {
     };
 }
 
+const allowedTables = async (table = '', tables = []) => {
+    const include = tables.includes(table);
+
+    if (!include) {
+        throw new Error(`La tabla: ${table} no es permitada - ${tables}`);
+    }
+}
+
 module.exports = {
     isValidRole,
     emailExists,
     userExistsById,
     categoryExistsById,
-    productExistsById
+    productExistsById,
+    allowedTables
 }

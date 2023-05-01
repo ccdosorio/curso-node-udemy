@@ -9,7 +9,7 @@ const {
     productsPost,
     productsPut,
     productsDelete
-} = require('../controllers/products');
+} = require('../controllers');
 const { productExistsById, categoryExistsById } = require('../helpers');
 
 const router = Router();

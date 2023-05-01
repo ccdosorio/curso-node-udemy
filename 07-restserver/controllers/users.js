@@ -8,7 +8,7 @@ const usersGet = async (req = request, res = response) => {
     const { offset = 0, limit = 5 } = req.query;
     const users = await User.findAndCountAll({
         where: { status: true },
-        attributes: [['id', 'uid'], 'name', 'email', 'role', 'status'],
+        attributes: [['id', 'uid'], 'name', 'email', 'role', 'img', 'status'],
         limit: Number(limit),
         offset: Number(offset)
     });
@@ -41,7 +41,7 @@ const usersPut = async (req = request, res = response) => {
     if (password) {
         // Ecriptar la password
         const salt = bcryptjs.genSaltSync();
-        userDB.password = bcryptjs.hashSync(password, salt);
+        user.password = bcryptjs.hashSync(password, salt);
     }
 
     const updateUser = await userDB.update(user, {

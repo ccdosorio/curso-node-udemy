@@ -7,7 +7,7 @@ const productsGet = async (req = request, res = response) => {
     const { offset = 0, limit = 5 } = req.query;
     const products = await Product.findAndCountAll({
         where: { status: true },
-        attributes: ['id', 'name', 'description', 'price', 'status', 'available'],
+        attributes: ['id', 'name', 'description', 'price', 'img', 'status', 'available'],
         include: [
             {
                 model: User,

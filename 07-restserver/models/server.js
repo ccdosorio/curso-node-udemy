@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const sequelize = require('../database/config.js');
+const fileUpload = require('express-fileupload');
 
 class Server {
 
@@ -14,7 +15,8 @@ class Server {
             users: '/api/users',
             categories: '/api/categories',
             products: '/api/products',
-            search: '/api/search'
+            search: '/api/search',
+            uploads: '/api/uploads'
         }
 
         // Conectar a base de datos
@@ -39,7 +41,7 @@ class Server {
     }
 
     async syncTables() {
-        await sequelize.sync({ force: true });
+        await sequelize.sync();
         console.log("All models were synchronized successfully.");
     }
 
@@ -52,6 +54,13 @@ class Server {
 
         // Directorio publico
         this.app.use(express.static('public'));
+
+        // FileUpload - Carga de archivos
+        this.app.use(fileUpload({
+            useTempFiles: true,
+            tempFileDir: '/tmp/',
+            createParentPath: true // Crear el directorio si no existe
+        }));
     }
 
     routes() {
@@ -60,6 +69,7 @@ class Server {
         this.app.use(this.paths.categories, require('../routes/categories'));
         this.app.use(this.paths.products, require('../routes/products'));
         this.app.use(this.paths.search, require('../routes/search'));
+        this.app.use(this.paths.uploads, require('../routes/uploads'));
     }
 
     listen() {

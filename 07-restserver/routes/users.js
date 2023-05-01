@@ -9,7 +9,7 @@ const {
     usertsPost,
     usersPut,
     usersDelete,
-} = require('../controllers/users');
+} = require('../controllers');
 
 const router = Router();
 
