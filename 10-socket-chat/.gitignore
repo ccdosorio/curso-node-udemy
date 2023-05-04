@@ -1,0 +1,9 @@
+node_modules/
+
+uploads/products/**.*
+uploads/users/**.*
+
+uploads/**.jpg
+uploads/**.png
+uploads/**.jpeg
+uploads/**.gif
