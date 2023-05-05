@@ -33,7 +33,7 @@ const socketController = async (socket, io) => {
         
         if (uid !== 0) {
             // Mensaje privado
-            socket.to(4).emit('private-message', { from: user.name, message });
+            socket.to(ui).emit('private-message', { from: user.name, message });
         } else {
             chatMessages.sendMessage(user.uid, user.name, message);
             io.emit('receive-messages', chatMessages.last10);
